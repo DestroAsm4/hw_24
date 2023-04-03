@@ -1,4 +1,4 @@
-from typing Dict, List, Tuple, Union
+from typing import Dict, List, Tuple, Union
 
 from flask import Blueprint, Response, jsonify, request
 from marshmallow import ValidationError
@@ -17,14 +17,18 @@ def perform_query() -> Union[Response, Tuple[Response, int]]:
         validated_data = RequestSchema().load(data)
     except ValidationError as error:
         return jsonify(error.messages), 400
+
+
     first_result = build_query(
-        cmd=validated_data['cmdl'],
-        value=validated_data['value'],
+        cmd=data['cmd1'],
+        value=data['value1'],
         data=None,
-        file_name=validated_data['file_name'],
+        file_name=data['file_name'],
     )
     result = build_query(
-        cmd=validated_data['cmd2'],
-        value=validated_data['value2'],
+        cmd=data['cmd2'],
+        value=data['value2'],
         data=first_result,
+        file_name=data['file_name'],
     )
+    return jsonify(list(result))
