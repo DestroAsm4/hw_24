@@ -1,6 +1,6 @@
 from typing import Callable, Dict, Iterable, List, Optional
 
-from function import filter_query, limit_query, map_query, sort_query, unique_query
+from function import filter_query, limit_query, map_query, sort_query, unique_query, regx
 
 CMD_TO_FUNCTION: Dict[str, Callable] = {
     'filter': filter_query,
@@ -8,6 +8,7 @@ CMD_TO_FUNCTION: Dict[str, Callable] = {
     'limit': limit_query,
     'map': map_query,
     'sort': sort_query,
+    'regx': regx,
 }
 
 def read_file(file_name: str) -> Iterable[str]:

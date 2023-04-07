@@ -1,4 +1,4 @@
-from typing import Dict, List, Tuple, Union
+from typing import Dict, List, Tuple, Union, List, Optional, Any, Iterable
 
 from flask import Blueprint, Response, jsonify, request
 from marshmallow import ValidationError
@@ -11,10 +11,13 @@ main_bp = Blueprint('main', __name__)
 @main_bp.route('/perform_query', methods=['POST'])
 def perform_query() -> Union[Response, Tuple[Response, int]]:
 
-    data: Dict[str, Union[List[dict], str]] = request.json
+
+
+    data = request.json
+
 
     try:
-        validated_data = RequestSchema().load(data)
+        RequestSchema().load(data)
     except ValidationError as error:
         return jsonify(error.messages), 400
 
