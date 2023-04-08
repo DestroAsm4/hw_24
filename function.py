@@ -20,6 +20,6 @@ def sort_query(value: str, data: Iterable[str]):
     reverse = value == 'desc'
     return sorted(data, reverse=reverse)
 
-def regx(value: str, data: Iterable[str]):
+def regex(value: str, data: Iterable[str]):
     reg = re.compile(value)
     return filter(lambda x: re.search(reg, x), data)
